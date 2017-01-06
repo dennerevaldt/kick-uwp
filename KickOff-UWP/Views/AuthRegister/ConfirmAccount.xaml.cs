@@ -49,6 +49,8 @@ namespace KickOff_UWP.Views.AuthRegister
 
             ComboBoxTypeAccount.ItemsSource = comboBoxOptions;
             ComboBoxTypeAccount.SelectedIndex = 0;
+
+            setLoading(false);
         }
 
         private void OnBackRequested(object sender, BackRequestedEventArgs e)

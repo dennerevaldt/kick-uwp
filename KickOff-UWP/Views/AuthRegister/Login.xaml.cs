@@ -90,6 +90,7 @@ namespace KickOff_UWP.Views.AuthRegister
             sess.WinAppId = "58a5039d16fb4a24924f2acf16c672c7";
             List<String> permissionList = new List<String>();
             permissionList.Add("public_profile");
+            permissionList.Add("email");
 
             FBPermissions permissions = new FBPermissions(permissionList);
 
