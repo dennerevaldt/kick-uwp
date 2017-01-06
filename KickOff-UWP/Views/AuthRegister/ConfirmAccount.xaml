@@ -1,0 +1,100 @@
+﻿<Page
+    x:Class="KickOff_UWP.Views.AuthRegister.ConfirmAccount"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:KickOff_UWP.Views.AuthRegister"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.BottomAppBar>
+        <CommandBar Background="#EEE">
+            <AppBarButton Label="Salvar" Icon="Save" Click="SaveNewUser" x:Name="AddItemAppBarBtn"></AppBarButton>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Grid Background="#ccc">
+        
+        <Grid x:Name="MainGrid" Margin="15 50 15 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="FirstGrid" Grid.Column="0" Grid.Row="0">
+                <TextBlock Text="Confirmar conta" TextAlignment="Center" FontSize="30"/>
+            </Grid>
+
+            <Grid x:Name="SecondGrid" Grid.Column="0" Grid.Row="1">
+                <TextBlock Name="txtBoxName" TextWrapping="Wrap" FontSize="18"/>
+            </Grid>
+
+            <Grid x:Name="threeGrid" Grid.Column="0" Grid.Row="2">
+                <ComboBox x:Name="ComboBoxTypeAccount" VerticalAlignment="Center" HorizontalAlignment="Stretch" DisplayMemberPath="description" SelectionChanged="ComboBoxTypeAccount_SelectionChanged"/>
+            </Grid>
+
+            <Grid x:Name="FourGrid" Grid.Column="0" Grid.Row="3">
+                <TextBox Name="txtBoxUsername" PlaceholderText="Usuário" VerticalAlignment="Center"/>
+            </Grid>
+
+            <Grid x:Name="FiveGrid" Grid.Column="0" Grid.Row="4">
+                <TextBox Name="txtBoxPosition" PlaceholderText="Posição" VerticalAlignment="Center"/>
+                <TextBox Name="txtBoxTelephone" PlaceholderText="Telefone" VerticalAlignment="Center"/>
+            </Grid>
+
+            <Grid x:Name="SixGrid" Grid.Column="0" Grid.Row="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <AutoSuggestBox
+                    Name="AutoSugCity" 
+                    Margin="0 4 0 0"
+                    VerticalAlignment="Center"
+                    QueryIcon="Find" 
+                    PlaceholderText="Pesquise sua cidade/estado"  
+                    TextChanged="AutoSuggestBox_TextChanged" 
+                    DisplayMemberPath="description"
+                    SuggestionChosen="AutoSuggestBox_SuggestionChosen" />
+
+                <RelativePanel
+                    Name="PlaceDetails"
+                    Grid.Row="1"
+                    HorizontalAlignment="Left"
+                    Visibility="Collapsed">
+
+                    <TextBlock
+                        Name="PlaceName"
+                        Style="{StaticResource BaseTextBlockStyle}"
+                        Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}" />
+
+                </RelativePanel>
+
+                <TextBlock
+                    Name="NoResults"
+                    Text="Nenhum resultado encontrado"
+                    Style="{StaticResource BodyTextBlockStyle}"
+                    Grid.Row="2"
+                    Visibility="Collapsed" />
+            </Grid>
+
+            <Grid x:Name="SevenGrid" Grid.Column="0" Grid.Row="6" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+                    <ProgressRing Name="prgLoad" Height="15" Width="15" Foreground="Gray" Margin="0 0 15 0"/>
+                    <TextBlock Name="txtBlockLoad" Text="Cadastrando..." Foreground="Gray" VerticalAlignment="Center" />
+                </StackPanel>
+            </Grid>
+
+        </Grid>
+        
+    </Grid>
+</Page>

@@ -1,0 +1,52 @@
+﻿<Page
+    x:Class="KickOff_UWP.Views.AuthRegister.Login"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:KickOff_UWP.Views.AuthRegister"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="#CCC">
+        <Grid x:Name="MainGrid" VerticalAlignment="Center" Margin="15 0 15 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="FirstGrid" Grid.Column="0" Grid.Row="0">
+                <TextBox x:Name="user" TextWrapping="Wrap" Text="" VerticalAlignment="Center" PlaceholderText="Usuário" />
+            </Grid>
+
+            <Grid x:Name="SecondGrid" Grid.Column="0" Grid.Row="1">
+                <PasswordBox x:Name="pass" VerticalAlignment="Center" PlaceholderText="Senha" />
+            </Grid>
+
+            <Grid x:Name="ThreeGrid" Grid.Column="0" Grid.Row="2">
+                <Button x:Name="btnLogin" Click="button_Login" HorizontalAlignment="Stretch" Content="Acessar" VerticalAlignment="Bottom" Margin="0,0,0,9" />
+            </Grid>
+            
+            <Grid x:Name="FourGrid" Grid.Column="0" Grid.Row="3">
+                <Button x:Name="btnLoginFace" Click="button_LoginFace" HorizontalAlignment="Stretch" Content="Login com Facebook" VerticalAlignment="Bottom" Background="#3b5998" Foreground="White" Margin="0,0,0,9" />
+            </Grid>
+
+            <Grid x:Name="FiveGrid" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+                    <ProgressRing Name="prgLoad" Height="15" Width="15" Foreground="Gray" Margin="0 0 15 0"/>
+                    <TextBlock Name="txtBlockLoad" Text="Carregando..." Foreground="Gray" VerticalAlignment="Center" />
+                </StackPanel>
+            </Grid>
+
+            <Grid x:Name="SixGrid" Grid.Column="0" Grid.Row="5">
+                <Button Name="btnRegister" Click="btnRegister_Click" Content="Registre-se agora" HorizontalAlignment="Stretch" Background="Transparent" BorderBrush="Transparent" Foreground="Gray"></Button>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
