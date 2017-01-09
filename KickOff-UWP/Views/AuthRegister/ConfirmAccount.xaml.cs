@@ -92,11 +92,11 @@ namespace KickOff_UWP.Views.AuthRegister
 
                     // create enterprise
                     Models.Entities.Enterprise enterprise = new Models.Entities.Enterprise("", user.Name, txtBoxUsername.Text, user.Email, user.Id, place.description, place.latLng.lat, place.latLng.lng, "", txtBoxTelephone.Text);
-                    Models.Entities.Enterprise result = await EnterpriseRepository.Create(enterprise);
+                    await EnterpriseRepository.Create(enterprise);
 
-                    if (result != null)
+                    if (enterprise != null)
                     {
-                        await authenticUser(user.Email, user.Id);
+                        await authenticUser(enterprise.userName, user.Id);
                         setLoading(false);
                     }
                     else
@@ -119,11 +119,11 @@ namespace KickOff_UWP.Views.AuthRegister
 
                     // create player
                     Models.Entities.Player player = new Models.Entities.Player("", user.Name, txtBoxUsername.Text, user.Email, user.Id, place.description, place.latLng.lat, place.latLng.lng, "", txtBoxPosition.Text);
-                    Models.Entities.Player result = await PlayerRepository.Create(player);
+                    await PlayerRepository.Create(player);
 
-                    if (result != null)
+                    if (player != null)
                     {
-                        await authenticUser(user.Email, user.Id);
+                        await authenticUser(player.userName, user.Id);
                         setLoading(false);
                     }
                     else
