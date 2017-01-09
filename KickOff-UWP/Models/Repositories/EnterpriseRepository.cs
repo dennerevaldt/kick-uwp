@@ -31,7 +31,7 @@ namespace KickOff_UWP.Models.Repositories
 
             try
             {
-                if (result == HttpStatusCode.OK)
+                if (result.id != null)
                 {
                     return enterprise;
                 }

@@ -31,6 +31,8 @@ namespace KickOff_UWP.Views.Enterprise
             this.InitializeComponent();
             PivotDashEnterprise.Title = "Dashboard empresa";
 
+            Window.Current.Activate();
+
             var localSettings = ApplicationData.Current.LocalSettings;
             txtBoxNameUser.Text = localSettings.Values["fullname"] as string;
             txtBoxEmailUser.Text = localSettings.Values["email"] as string;

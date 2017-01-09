@@ -61,6 +61,13 @@
                                 Visibility="Collapsed" />
                     </Grid>
 
+                    <Grid HorizontalAlignment="Center" Margin="20">
+                        <StackPanel Orientation="Horizontal">
+                            <ProgressRing Name="prgLoadEn" Height="15" Width="15" Foreground="Gray" Margin="0 0 15 0"/>
+                            <TextBlock Name="txtBlockLoadEn" Text="Carregando..." Foreground="Gray" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Grid>
+
                 </StackPanel>
             </PivotItem>
 
@@ -109,7 +116,14 @@
                                 Grid.Row="2"
                                 Visibility="Collapsed" />
                     </Grid>
-                    
+
+                    <Grid HorizontalAlignment="Center" Margin="20">
+                        <StackPanel Orientation="Horizontal">
+                            <ProgressRing Name="prgLoadPl" Height="15" Width="15" Foreground="Gray" Margin="0 0 15 0"/>
+                            <TextBlock Name="txtBlockLoadPl" Text="Carregando..." Foreground="Gray" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Grid>
+
                 </StackPanel>
             </PivotItem>
         </Pivot>

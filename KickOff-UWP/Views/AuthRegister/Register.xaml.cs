@@ -26,7 +26,9 @@ namespace KickOff_UWP.Views.AuthRegister
             this.InitializeComponent();
 
             SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
-            Window.Current.Activate();
+
+            setLoading(false, 0);
+            setLoading(false, 1);
         }
 
         private void OnBackRequested(object sender, BackRequestedEventArgs e)
@@ -48,24 +50,28 @@ namespace KickOff_UWP.Views.AuthRegister
 
             int pivot = PivotUser.SelectedIndex;
 
+            setLoading(true, pivot);
+
             if (pivot == 0) //enterprise
             {
                 if (txtBoxEnterpriseFullname.Text == "" || txtBoxEnterpriseEmail.Text == "" || txtBoxEnterpriseUsername.Text == "" || txtBoxEnterprisePwd.Password == "" || txtBoxEnterpriseTelephone.Text == "" || place.latLng == null)
                 {
                     DialogCustom.dialog("Atenção", "Preencha todos os campos corretamente");
+                    setLoading(false, pivot);
                 }
                 else
                 {
                     // create enterprise
                     Models.Entities.Enterprise enterprise = new Models.Entities.Enterprise("", txtBoxEnterpriseFullname.Text, txtBoxEnterpriseUsername.Text, txtBoxEnterpriseEmail.Text, txtBoxEnterprisePwd.Password, place.description, place.latLng.lat, place.latLng.lng, "", txtBoxEnterpriseTelephone.Text);
-                    await EnterpriseRepository.Create(enterprise);
+                    var result = await EnterpriseRepository.Create(enterprise);
 
-                    if (enterprise != null)
+                    if (result != null)
                     {
                         await authenticUser(enterprise.userName, enterprise.password);
                     } else
                     {
-                        DialogCustom.dialog("Ops :(", "Estamos com problemas, tente novamente");
+                        DialogCustom.dialog("Ops :(", "Estamos com problemas, verifique os dados e tente novamente");
+                        setLoading(false, pivot);
                     }
                 }
             }
@@ -75,19 +81,21 @@ namespace KickOff_UWP.Views.AuthRegister
                 if (txtBoxPlayerFullname.Text == "" || txtBoxPlayerEmail.Text == "" || txtBoxPlayerUsername.Text == "" || txtBoxPlayerPwd.Password == "" || txtBoxPlayerPosition.Text == "" || place.latLng == null)
                 {
                     DialogCustom.dialog("Atenção", "Preencha todos os campos corretamente");
+                    setLoading(false, pivot);
                 }
                 else
                 {
                     // create player
                     Models.Entities.Player player = new Models.Entities.Player("", txtBoxPlayerFullname.Text, txtBoxPlayerUsername.Text, txtBoxPlayerEmail.Text, txtBoxPlayerPwd.Password, place.description, place.latLng.lat, place.latLng.lng, "", txtBoxPlayerPosition.Text);
-                    await PlayerRepository.Create(player);
+                    var result = await PlayerRepository.Create(player);
 
-                    if (player != null)
+                    if (result != null)
                     {
                         await authenticUser(player.userName, player.password);
                     } else
                     {
-                        DialogCustom.dialog("Ops :(", "Estamos com problemas, tente novamente");
+                        DialogCustom.dialog("Ops :(", "Estamos com problemas, verifique os dados e tente novamente");
+                        setLoading(false, pivot);
                     }               
                 }
             }
@@ -108,7 +116,7 @@ namespace KickOff_UWP.Views.AuthRegister
                 {
                     List<Place> data = await PlaceAPI.autocomplete(AutoSugCityEnterprise.Text);
 
-                    if (data.Count > 0)
+                    if (data != null && data.Count > 0)
                     {
                         PlaceDetailsEnterprise.Visibility = Visibility.Visible;
                         NoResultsEnterprise.Visibility = Visibility.Collapsed;
@@ -130,17 +138,20 @@ namespace KickOff_UWP.Views.AuthRegister
                 {
                     List<Place> data = await PlaceAPI.autocomplete(AutoSugCityPlayer.Text);
 
-                    if (data.Count > 0)
+                    if (data != null)
                     {
-                        PlaceDetailsPlayer.Visibility = Visibility.Visible;
-                        NoResultsPlayer.Visibility = Visibility.Collapsed;
+                        if (data.Count > 0)
+                        {
+                            PlaceDetailsPlayer.Visibility = Visibility.Visible;
+                            NoResultsPlayer.Visibility = Visibility.Collapsed;
+                        }
+                        else
+                        {
+                            PlaceDetailsPlayer.Visibility = Visibility.Collapsed;
+                            NoResultsPlayer.Visibility = Visibility.Visible;
+                        }
                     }
-                    else
-                    {
-                        PlaceDetailsPlayer.Visibility = Visibility.Collapsed;
-                        NoResultsPlayer.Visibility = Visibility.Visible;
-                    }
-
+                    
                     //Set the ItemsSource to be your filtered dataset
                     sender.ItemsSource = data;
                 }
@@ -177,10 +188,25 @@ namespace KickOff_UWP.Views.AuthRegister
             {
                 string token = await AuthRepository.login(username, password);
 
-                if (token == "")
+                switch (token)
                 {
-                    DialogCustom.dialog("Ops...", "Usuário ou senha estão incorretos.");
-                    return;
+                    case "":
+                        DialogCustom.dialog("Ops...", "Usuário ou senha estão incorretos.");
+                        setLoading(false, 0);
+                        setLoading(false, 1);
+                        return;
+                    case "404":
+                        DialogCustom.dialog("Ops...", "Usuário incorreto ou não existe.");
+                        setLoading(false, 0);
+                        setLoading(false, 1);
+                        return;
+                    case "500":
+                        DialogCustom.dialog("Ops...", "Usuário ou senha estão incorretos.");
+                        setLoading(false, 0);
+            setLoading(false, 1);
+                        return;
+                    default:
+                        break;
                 }
 
                 dynamic data = await AuthRepository.getDataUSer(token);
@@ -202,6 +228,24 @@ namespace KickOff_UWP.Views.AuthRegister
             {
                 throw ex;
             }
+        }
+
+        private void setLoading(bool isLoading, int pivot)
+        {
+            if (pivot == 0)
+            {
+                txtBlockLoadEn.Visibility = isLoading ? Visibility.Visible : Visibility.Collapsed;
+                prgLoadEn.IsActive = isLoading;
+                AddItemAppBarBtn.IsEnabled = !isLoading;
+            }
+
+            if (pivot == 1)
+            {
+                txtBlockLoadPl.Visibility = isLoading ? Visibility.Visible : Visibility.Collapsed;
+                prgLoadPl.IsActive = isLoading;
+                AddItemAppBarBtn.IsEnabled = !isLoading;
+            }
+            
         }
     }
 }
