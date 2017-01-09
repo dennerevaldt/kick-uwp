@@ -37,7 +37,7 @@ namespace KickOff_UWP.Views.AuthRegister
 
             if (username == "" || password == "")
             {
-                DialogCustom.dialog("Ops...", "Usuário ou senha incorretos.");
+                DialogCustom.dialog("Ops...", "Usuário e senha devem ser preenchidos corretamente.");
                 return;
             }
 
@@ -48,10 +48,19 @@ namespace KickOff_UWP.Views.AuthRegister
                 string token = await AuthRepository.login(username, password);
                 setLoading(false);
 
-                if (token == "")
+                switch (token)
                 {
-                    DialogCustom.dialog("Ops...", "Usuário ou senha estão incorretos.");
-                    return;
+                    case "":
+                        DialogCustom.dialog("Ops...", "Usuário ou senha estão incorretos.");
+                        return;
+                    case "404":
+                        DialogCustom.dialog("Ops...", "Usuário incorreto ou não existe.");
+                        return;
+                    case "500":
+                        DialogCustom.dialog("Ops...", "Usuário ou senha estão incorretos.");
+                        return;
+                    default:
+                        break;
                 }
 
                 dynamic data = await AuthRepository.getDataUSer(token);

@@ -1,7 +1,11 @@
 ﻿using KickOff_UWP.Models.Entities;
 using KickOff_UWP.Models.Repositories;
 using KickOff_UWP.Models.Utils;
+using KickOff_UWP.Views.Enterprise;
+using KickOff_UWP.Views.Player;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -54,11 +58,11 @@ namespace KickOff_UWP.Views.AuthRegister
                 {
                     // create enterprise
                     Models.Entities.Enterprise enterprise = new Models.Entities.Enterprise("", txtBoxEnterpriseFullname.Text, txtBoxEnterpriseUsername.Text, txtBoxEnterpriseEmail.Text, txtBoxEnterprisePwd.Password, place.description, place.latLng.lat, place.latLng.lng, "", txtBoxEnterpriseTelephone.Text);
-                    Models.Entities.Enterprise result = await EnterpriseRepository.Create(enterprise);
+                    await EnterpriseRepository.Create(enterprise);
 
-                    if (result != null)
+                    if (enterprise != null)
                     {
-                        DialogCustom.dialog("Parabéns", "Cadastrado com sucesso!");
+                        await authenticUser(enterprise.userName, enterprise.password);
                     } else
                     {
                         DialogCustom.dialog("Ops :(", "Estamos com problemas, tente novamente");
@@ -76,11 +80,11 @@ namespace KickOff_UWP.Views.AuthRegister
                 {
                     // create player
                     Models.Entities.Player player = new Models.Entities.Player("", txtBoxPlayerFullname.Text, txtBoxPlayerUsername.Text, txtBoxPlayerEmail.Text, txtBoxPlayerPwd.Password, place.description, place.latLng.lat, place.latLng.lng, "", txtBoxPlayerPosition.Text);
-                    Models.Entities.Player result = await PlayerRepository.Create(player);
+                    await PlayerRepository.Create(player);
 
-                    if (result != null)
+                    if (player != null)
                     {
-                        DialogCustom.dialog("Parabéns", "Cadastrado com sucesso!");
+                        await authenticUser(player.userName, player.password);
                     } else
                     {
                         DialogCustom.dialog("Ops :(", "Estamos com problemas, tente novamente");
@@ -164,6 +168,39 @@ namespace KickOff_UWP.Views.AuthRegister
                     AutoSugCityPlayer.Text = place.description;
                     place = await PlaceAPI.latLng(place);
                 }
+            }
+        }
+
+        private async Task authenticUser(string username, string password)
+        {
+            try
+            {
+                string token = await AuthRepository.login(username, password);
+
+                if (token == "")
+                {
+                    DialogCustom.dialog("Ops...", "Usuário ou senha estão incorretos.");
+                    return;
+                }
+
+                dynamic data = await AuthRepository.getDataUSer(token);
+                AuthRepository.setCredentials(token, data);
+
+                var typeUser = (string)data.Person.typeperson;
+                if (typeUser == "P")
+                {
+                    // dash player
+                    Frame.Navigate(typeof(DashboardPlayer));
+                }
+                else
+                {
+                    // dash enterprise
+                    Frame.Navigate(typeof(DashboardEnterprise));
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
     }
