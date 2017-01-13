@@ -7,12 +7,47 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Page.BottomAppBar>
+        <CommandBar Name="AppBar" Visibility="Visible">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Visibility="Collapsed" Name="AddCourtBtn" Icon="Add" IsCompact="True" Label="adicionar" Click="AddCourtBtn_Click" />
+                <AppBarButton Visibility="Collapsed" Name="AddScheduleBtn" Icon="Add" IsCompact="True" Label="adicionar" Click="AddScheduleBtn_Click" />
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+
     <Grid Background="#CCC">
-        <Pivot Name="PivotDashEnterprise">
+        <Pivot Name="PivotDashEnterprise" SelectionChanged="pivotEnterprise_SelectionChanged">
             <PivotItem Name="PivotEnterpriseCourt">
                 <PivotItem.Header>
                     <TextBlock Text="Quadras" />
                 </PivotItem.Header>
+
+                <Grid Name="gridCourtList">
+                    
+                    <ProgressRing Name="loadingCourt" Width="30" Height="30" Foreground="Gray" />
+                    
+                    <ListView x:Name="courtList" SelectionChanged="courtList_SelectionChanged">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Holding="GridCourtList_Holding">
+
+                                    <FlyoutBase.AttachedFlyout>
+                                        <MenuFlyout>
+                                            <MenuFlyoutItem x:Name="DeleteButtonCourt" Text="Excluir" Click="DeleteButtonCourt_Click"/>
+                                        </MenuFlyout>
+                                    </FlyoutBase.AttachedFlyout>
+
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="{Binding name}" FontSize="20" FontWeight="Bold" />
+                                        <TextBlock Text="{Binding category}" FontSize="14" />
+                                    </StackPanel>
+
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
             </PivotItem>
 
             <PivotItem Name="PivotEnterpriseSchedule">

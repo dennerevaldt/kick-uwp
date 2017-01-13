@@ -96,12 +96,14 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Entities\ComboBoxType.cs" />
+    <Compile Include="Models\Entities\Court.cs" />
     <Compile Include="Models\Entities\Enterprise.cs" />
     <Compile Include="Models\Entities\LatLng.cs" />
     <Compile Include="Models\Entities\Person.cs" />
     <Compile Include="Models\Entities\Place.cs" />
     <Compile Include="Models\Entities\Player.cs" />
     <Compile Include="Models\Repositories\AuthRepository.cs" />
+    <Compile Include="Models\Repositories\CourtRepository.cs" />
     <Compile Include="Models\Repositories\EnterpriseRepository.cs" />
     <Compile Include="Models\Repositories\PlayerRepository.cs" />
     <Compile Include="Models\Utils\Connection.cs" />
@@ -121,6 +123,15 @@
     </Compile>
     <Compile Include="Views\Enterprise\DashboardEnterprise.xaml.cs">
       <DependentUpon>DashboardEnterprise.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Enterprise\EditCourt.xaml.cs">
+      <DependentUpon>EditCourt.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Enterprise\NewCourt.xaml.cs">
+      <DependentUpon>NewCourt.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Enterprise\NewSchedule.xaml.cs">
+      <DependentUpon>NewSchedule.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Player\DashboardPlayer.xaml.cs">
       <DependentUpon>DashboardPlayer.xaml</DependentUpon>
@@ -160,6 +171,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Enterprise\DashboardEnterprise.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Enterprise\EditCourt.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Enterprise\NewCourt.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Enterprise\NewSchedule.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

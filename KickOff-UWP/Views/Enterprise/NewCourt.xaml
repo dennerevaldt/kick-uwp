@@ -1,0 +1,27 @@
+﻿<Page
+    x:Class="KickOff_UWP.Views.Enterprise.NewCourt"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:KickOff_UWP.Views.Enterprise"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.BottomAppBar>
+        <CommandBar Name="AppBar" Visibility="Visible">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Name="SaveCourtBtn" Icon="Save" IsCompact="True" Label="adicionar" Click="SaveCourtBtn_Click" />
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Grid Background="#CCC">
+        <StackPanel Margin="10 14 10 15">
+            <TextBlock Text="Nova quadra" FontWeight="Bold"/>
+            <TextBox Name="txtBoxName" PlaceholderText="Nome da quadra" Margin="0 30 0 0"/>
+            <ComboBox x:Name="ComboBoxTypeCourt" VerticalAlignment="Center" Margin="0 10 0 0" HorizontalAlignment="Stretch" DisplayMemberPath="description" />
+            <ProgressRing Name="loadingNewCourt" Height="15" Width="15" Foreground="Gray" Margin="0 15 15 0"/>
+            <TextBlock Name="txtBlockNewCourt" Text="Salvando..." Foreground="Gray" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        </StackPanel>
+    </Grid>
+</Page>

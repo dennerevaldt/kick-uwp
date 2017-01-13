@@ -8,6 +8,7 @@ using winsdkfb;
 using winsdkfb.Graph;
 using KickOff_UWP.Views.Player;
 using KickOff_UWP.Views.Enterprise;
+using Newtonsoft.Json;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -63,7 +64,7 @@ namespace KickOff_UWP.Views.AuthRegister
                         break;
                 }
 
-                dynamic data = await AuthRepository.getDataUSer(token);
+                dynamic data = JsonConvert.DeserializeObject(await AuthRepository.getDataUSer(token));
                 AuthRepository.setCredentials(token, data);
                 setLoading(false);
                 var typeUser = (string)data.Person.typeperson;

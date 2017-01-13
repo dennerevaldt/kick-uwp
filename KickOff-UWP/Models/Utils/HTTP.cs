@@ -38,7 +38,7 @@ namespace KickOff_UWP.Models.Utils
                 return httpResponse.StatusCode;
             }
 
-            return JsonConvert.DeserializeObject<dynamic>(httpResponseBody);
+            return httpResponseBody;
         }
 
         public static async Task<dynamic> post(string url, Dictionary<string, string> param, string token)
