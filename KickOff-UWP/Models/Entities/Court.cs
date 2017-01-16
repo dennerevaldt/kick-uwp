@@ -11,6 +11,7 @@ namespace KickOff_UWP.Models.Entities
         public string id { get; set; }
         public string name { get; set; }
         public string category { get; set; }
+        public string icon { get; set; }
 
         public Court() { }
 

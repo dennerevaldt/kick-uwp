@@ -27,7 +27,7 @@
                     
                     <ProgressRing Name="loadingCourt" Width="30" Height="30" Foreground="Gray" />
                     
-                    <ListView x:Name="courtList" SelectionChanged="courtList_SelectionChanged">
+                    <ListView x:Name="courtList" SelectionChanged="courtList_SelectionChanged" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <Grid Holding="GridCourtList_Holding">
@@ -38,9 +38,12 @@
                                         </MenuFlyout>
                                     </FlyoutBase.AttachedFlyout>
 
-                                    <StackPanel Orientation="Vertical">
-                                        <TextBlock Text="{Binding name}" FontSize="20" FontWeight="Bold" />
-                                        <TextBlock Text="{Binding category}" FontSize="14" />
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Height="40" Width="40" Source="{Binding icon}"></Image>
+                                        <StackPanel Margin="10">
+                                            <TextBlock Text="{Binding name}" FontSize="20" FontWeight="Bold" />
+                                            <TextBlock Text="{Binding category}" FontSize="14" />
+                                        </StackPanel>
                                     </StackPanel>
 
                                 </Grid>

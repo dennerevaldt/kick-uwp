@@ -57,6 +57,19 @@ namespace KickOff_UWP.Models.Repositories
 
             ObservableCollection<Court> list = JsonConvert.DeserializeObject<ObservableCollection<Court>>(result);
 
+            foreach (Court item in list)
+            {
+                if (item.category == "Futebol society (7)")
+                {
+                    item.icon = "/Assets/icon_society.png";
+                }
+
+                if (item.category == "Futebol de salão (Futsal)")
+                {
+                    item.icon = "/Assets/icon_futsal.png";
+                }
+            }
+
             return list;
         }
 

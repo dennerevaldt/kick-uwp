@@ -7,12 +7,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="#CCC">
+    <Grid Background="Green">
         <Grid x:Name="MainGrid" VerticalAlignment="Center" Margin="15 0 15 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition Height="120"/>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="50"/>
@@ -21,31 +22,39 @@
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
 
-            <Grid x:Name="FirstGrid" Grid.Column="0" Grid.Row="0">
-                <TextBox x:Name="user" TextWrapping="Wrap" Text="" VerticalAlignment="Center" PlaceholderText="Usuário" />
+            <Grid x:Name="ZeroGrid" Grid.Column="0" Grid.Row="0">
+                <Image Source="/Assets/logo_200.png" Height="100" Margin="0 0 0 20" Stretch="Uniform" />
             </Grid>
 
-            <Grid x:Name="SecondGrid" Grid.Column="0" Grid.Row="1">
-                <PasswordBox x:Name="pass" VerticalAlignment="Center" PlaceholderText="Senha" />
+            <Grid x:Name="FirstGrid" Grid.Column="0" Grid.Row="1">
+                <TextBox x:Name="user" TextWrapping="Wrap" Text="" VerticalAlignment="Center" PlaceholderText="Usuário" BorderBrush="Transparent" Background="White" />
             </Grid>
 
-            <Grid x:Name="ThreeGrid" Grid.Column="0" Grid.Row="2">
-                <Button x:Name="btnLogin" Click="button_Login" HorizontalAlignment="Stretch" Content="Acessar" VerticalAlignment="Bottom" Margin="0,0,0,9" />
+            <Grid x:Name="SecondGrid" Grid.Column="0" Grid.Row="2">
+                <PasswordBox x:Name="pass" VerticalAlignment="Center" PlaceholderText="Senha" BorderBrush="Transparent" Background="White" />
             </Grid>
-            
-            <Grid x:Name="FourGrid" Grid.Column="0" Grid.Row="3">
+
+            <Grid x:Name="ThreeGrid" Grid.Column="0" Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="42*"/>
+                    <ColumnDefinition Width="13*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="btnLogin" Click="button_Login" HorizontalAlignment="Stretch" Content="Acessar" VerticalAlignment="Bottom" Margin="0,0,0,9" Foreground="White" Grid.ColumnSpan="2" />
+            </Grid>
+
+            <Grid x:Name="FourGrid" Grid.Column="0" Grid.Row="4">
                 <Button x:Name="btnLoginFace" Click="button_LoginFace" HorizontalAlignment="Stretch" Content="Login com Facebook" VerticalAlignment="Bottom" Background="#3b5998" Foreground="White" Margin="0,0,0,9" />
             </Grid>
 
-            <Grid x:Name="FiveGrid" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Center">
+            <Grid x:Name="FiveGrid" Grid.Column="0" Grid.Row="5" HorizontalAlignment="Center">
                 <StackPanel Orientation="Horizontal">
-                    <ProgressRing Name="prgLoad" Height="15" Width="15" Foreground="Gray" Margin="0 0 15 0"/>
-                    <TextBlock Name="txtBlockLoad" Text="Carregando..." Foreground="Gray" VerticalAlignment="Center" />
+                    <ProgressRing Name="prgLoad" Height="15" Width="15" Foreground="White" Margin="0 0 15 0"/>
+                    <TextBlock Name="txtBlockLoad" Text="Carregando..." Foreground="White" VerticalAlignment="Center" />
                 </StackPanel>
             </Grid>
 
-            <Grid x:Name="SixGrid" Grid.Column="0" Grid.Row="5">
-                <Button Name="btnRegister" Click="btnRegister_Click" Content="Registre-se agora" HorizontalAlignment="Stretch" Background="Transparent" BorderBrush="Transparent" Foreground="Gray"></Button>
+            <Grid x:Name="SixGrid" Grid.Column="0" Grid.Row="6">
+                <Button Name="btnRegister" Click="btnRegister_Click" Content="Registre-se agora" HorizontalAlignment="Stretch" Background="Transparent" BorderBrush="Transparent" Foreground="White"></Button>
             </Grid>
         </Grid>
     </Grid>

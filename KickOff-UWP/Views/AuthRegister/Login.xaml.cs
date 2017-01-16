@@ -23,6 +23,7 @@ namespace KickOff_UWP.Views.AuthRegister
         {
             this.InitializeComponent();
             setLoading(false);
+            Window.Current.Activate();
         }
 
         private async void button_Login(object sender, RoutedEventArgs e)
@@ -123,7 +124,7 @@ namespace KickOff_UWP.Views.AuthRegister
                     DialogCustom.dialog("Ops :/", "Estamos com problemas, tente mais tarde");
                 }          
                   
-                dynamic data = await AuthRepository.getDataUSer(token);
+                dynamic data = JsonConvert.DeserializeObject(await AuthRepository.getDataUSer(token));
                 AuthRepository.setCredentials(token, data);
 
                 setLoading(false);
