@@ -23,6 +23,7 @@ namespace KickOff_UWP.Views.AuthRegister
         {
             this.InitializeComponent();
             setLoading(false);
+
             Window.Current.Activate();
         }
 

@@ -8,16 +8,16 @@
     mc:Ignorable="d">
 
     <Page.BottomAppBar>
-        <CommandBar Name="AppBar" Visibility="Visible">
+        <CommandBar Name="AppBar" Visibility="Visible" Background="DarkGreen">
             <CommandBar.PrimaryCommands>
-                <AppBarButton Visibility="Collapsed" Name="AddCourtBtn" Icon="Add" IsCompact="True" Label="adicionar" Click="AddCourtBtn_Click" />
-                <AppBarButton Visibility="Collapsed" Name="AddScheduleBtn" Icon="Add" IsCompact="True" Label="adicionar" Click="AddScheduleBtn_Click" />
+                <AppBarButton Visibility="Collapsed" Name="AddCourtBtn" Icon="Add" IsCompact="True" Label="adicionar" Click="AddCourtBtn_Click" Foreground="White" />
+                <AppBarButton Visibility="Collapsed" Name="AddScheduleBtn" Icon="Add" IsCompact="True" Label="adicionar" Click="AddScheduleBtn_Click" Foreground="White" />
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
 
-    <Grid Background="#CCC">
-        <Pivot Name="PivotDashEnterprise" SelectionChanged="pivotEnterprise_SelectionChanged">
+    <Grid Background="#fff">
+        <Pivot Name="PivotDashEnterprise" SelectionChanged="pivotEnterprise_SelectionChanged" Foreground="DarkGreen">
             <PivotItem Name="PivotEnterpriseCourt">
                 <PivotItem.Header>
                     <TextBlock Text="Quadras" />
@@ -25,7 +25,7 @@
 
                 <Grid Name="gridCourtList">
                     
-                    <ProgressRing Name="loadingCourt" Width="30" Height="30" Foreground="Gray" />
+                    <ProgressRing Name="loadingCourt" Width="30" Height="30" Foreground="DarkGreen" />
                     
                     <ListView x:Name="courtList" SelectionChanged="courtList_SelectionChanged" >
                         <ListView.ItemTemplate>
@@ -45,11 +45,12 @@
                                             <TextBlock Text="{Binding category}" FontSize="14" />
                                         </StackPanel>
                                     </StackPanel>
-
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
+
+                    <TextBlock x:Name="CourtEmpty" Visibility="Collapsed" Text="Nenhum item na lista." FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </Grid>
             </PivotItem>
 
@@ -57,18 +58,27 @@
                 <PivotItem.Header>
                     <TextBlock Text="Horários" />
                 </PivotItem.Header>
+
+                <Grid>
+                    <TextBlock x:Name="ScheduleEmpty" Visibility="Collapsed" Text="Nenhum item na lista." FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </Grid>
             </PivotItem>
 
             <PivotItem Name="PivotEnterpriseNotifications">
                 <PivotItem.Header>
                     <TextBlock Text="Notificações" />
                 </PivotItem.Header>
+
+                <Grid>
+                    <TextBlock x:Name="NotificationsEmpty" Visibility="Collapsed" Text="Nenhum item na lista." FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </Grid>
             </PivotItem>
 
             <PivotItem Name="PivotEnterpriseProfile">
                 <PivotItem.Header>
                     <TextBlock Text="Perfil" />
                 </PivotItem.Header>
+                
 
                 <Grid x:Name="MainGrid">
                     <Grid.ColumnDefinitions>
@@ -93,7 +103,6 @@
                     <Grid x:Name="ThreeGrid" Grid.Column="0" Grid.Row="2">
                         <Button Name="btnLogoutEnterprise" Content="Sair" Click="btnLogoutEnterprise_Click"  VerticalAlignment="Center"/>
                     </Grid>
-
                 </Grid>
             </PivotItem>
         </Pivot>

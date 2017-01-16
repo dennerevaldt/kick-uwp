@@ -5,6 +5,7 @@ using KickOff_UWP.Views.AuthRegister;
 using System;
 using System.Collections.ObjectModel;
 using Windows.Storage;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -50,6 +51,24 @@ namespace KickOff_UWP.Views.Enterprise
         private async void pivotEnterprise_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+            Pivot pivot = sender as Pivot;
+            PivotItem pivotItemSelected = ((PivotItem)((Pivot)sender).SelectedItem);
+
+            for (int i = 0; i < pivot.Items.Count; i++)
+            {
+                PivotItem pivotItem = pivot.Items[i] as PivotItem;
+                TextBlock tb = pivotItem.Header as TextBlock;
+                if (pivotItem == pivotItemSelected)
+                {
+                    //Style 
+                    tb.Foreground = new SolidColorBrush(Colors.DarkGreen);
+                }
+                else
+                {
+                    tb.Foreground = new SolidColorBrush(Colors.Gray);
+                }
+            }
+
             switch (PivotDashEnterprise.SelectedIndex)
             {
                 case 0:
@@ -64,6 +83,8 @@ namespace KickOff_UWP.Views.Enterprise
                     listCourt = await CourtRepository.GetAll();
                     courtList.ItemsSource = listCourt;
 
+                    CourtEmpty.Visibility = listCourt.Count <= 0 ? Visibility.Visible : Visibility.Collapsed;
+
                     loadingCourt.IsActive = false;
 
                     break;
@@ -71,9 +92,13 @@ namespace KickOff_UWP.Views.Enterprise
                     AppBar.Visibility = Visibility.Visible;
                     AddCourtBtn.Visibility = Visibility.Collapsed;
                     AddScheduleBtn.Visibility = Visibility.Visible;
+
+                    ScheduleEmpty.Visibility = Visibility.Visible;
                     break;
                 case 2:
                     AppBar.Visibility = Visibility.Collapsed;
+
+                    NotificationsEmpty.Visibility = Visibility.Visible;
                     break;
                 case 3:
                     AppBar.Visibility = Visibility.Collapsed;
@@ -82,6 +107,7 @@ namespace KickOff_UWP.Views.Enterprise
                     txtBoxNameUser.Text = localSettings.Values["fullname"] as string;
                     txtBoxEmailUser.Text = localSettings.Values["email"] as string;
 
+                    CourtEmpty.Visibility = listCourt.Count <= 0 ? Visibility.Visible : Visibility.Collapsed;
                     break;
             }
         }
@@ -116,6 +142,8 @@ namespace KickOff_UWP.Views.Enterprise
             }
 
             listCourt.Remove(courtSelected);
+            CourtEmpty.Visibility = listCourt.Count <= 0 ? Visibility.Visible : Visibility.Collapsed;
+
             var result = await CourtRepository.Delete(courtSelected);
 
             if (result == null)

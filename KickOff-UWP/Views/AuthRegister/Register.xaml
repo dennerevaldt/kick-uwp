@@ -8,13 +8,13 @@
     mc:Ignorable="d">
 
     <Page.BottomAppBar>
-        <CommandBar Background="#EEE">
-            <AppBarButton Label="Salvar" Icon="Save" Click="SaveNewUser" x:Name="AddItemAppBarBtn"></AppBarButton>
+        <CommandBar Background="DarkGreen">
+            <AppBarButton Label="Salvar" Icon="Save" Click="SaveNewUser" x:Name="AddItemAppBarBtn" Foreground="White"></AppBarButton>
         </CommandBar>
     </Page.BottomAppBar>
-
-    <Grid Background="#CCC">
-        <Pivot Title="Cadastrar-se" Name="PivotUser">
+    
+    <Grid Background="#fff">
+        <Pivot Title="Cadastrar-se" Foreground="DarkGreen" Name="PivotUser" SelectionChanged="PivotUser_SelectionChanged">
             <PivotItem Name="PivotItemEnterprise">
                 <PivotItem.Header>
                     <TextBlock Text="Empresa" />
@@ -63,8 +63,8 @@
 
                     <Grid HorizontalAlignment="Center" Margin="20">
                         <StackPanel Orientation="Horizontal">
-                            <ProgressRing Name="prgLoadEn" Height="15" Width="15" Foreground="Gray" Margin="0 0 15 0"/>
-                            <TextBlock Name="txtBlockLoadEn" Text="Carregando..." Foreground="Gray" VerticalAlignment="Center" />
+                            <ProgressRing Name="prgLoadEn" Height="15" Width="15" Foreground="White" Margin="0 0 15 0" />
+                            <TextBlock Name="txtBlockLoadEn" Text="Carregando..." Foreground="White" VerticalAlignment="Center" />
                         </StackPanel>
                     </Grid>
 

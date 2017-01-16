@@ -6,9 +6,11 @@ using KickOff_UWP.Views.Player;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -246,6 +248,27 @@ namespace KickOff_UWP.Views.AuthRegister
                 AddItemAppBarBtn.IsEnabled = !isLoading;
             }
             
+        }
+
+        private void PivotUser_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Pivot pivot = sender as Pivot;
+            PivotItem pivotItemSelected = ((PivotItem)((Pivot)sender).SelectedItem);
+
+            for (int i = 0; i < pivot.Items.Count; i++)
+            {
+                PivotItem pivotItem = pivot.Items[i] as PivotItem;
+                TextBlock tb = pivotItem.Header as TextBlock;
+                if (pivotItem == pivotItemSelected)
+                {
+                    //Style 
+                    tb.Foreground = new SolidColorBrush(Colors.DarkGreen);
+                }
+                else
+                {
+                    tb.Foreground = new SolidColorBrush(Colors.Gray);
+                }
+            }
         }
     }
 }
