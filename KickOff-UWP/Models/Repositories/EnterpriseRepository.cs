@@ -3,6 +3,7 @@ using KickOff_UWP.Models.Utils;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -39,6 +40,31 @@ namespace KickOff_UWP.Models.Repositories
                 {
                     return null;
                 }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public static async Task<dynamic> GetProximity(LatLng latLng)
+        {
+            string url = Constants.getBaseUrl() + "/enterprise/proximity";
+
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            string user = localSettings.Values["fullname"] as string;
+
+            string token = AuthRepository.getCredentials(user);
+
+            var values = new Dictionary<string, string>();
+            values.Add("lat", latLng.lat);
+            values.Add("lng", latLng.lng);
+
+            var result = await HTTP.post(url, values, token);
+
+            try
+            {
+                return result;
             }
             catch (Exception)
             {

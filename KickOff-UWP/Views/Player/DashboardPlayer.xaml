@@ -7,24 +7,64 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="#CCC">
-        <Pivot Name="PivotDashPlayer">
+    <Page.BottomAppBar>
+        <CommandBar Name="AppBar" Visibility="Visible" Background="DarkGreen">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Name="AddGameBtn" Icon="Add" IsCompact="True" Label="adicionar" Click="AddGameBtn_Click" Foreground="White" />
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Grid Background="#fff">
+        <Pivot Name="PivotDashPlayer" SelectionChanged="PivotDashPlayer_SelectionChanged" Foreground="DarkGreen">
             <PivotItem Name="PivotPlayerCourt">
                 <PivotItem.Header>
                     <TextBlock Text="Jogos" />
                 </PivotItem.Header>
+
+                <Grid Name="gridGameList">
+
+                    <ProgressRing Name="loadingGame" Width="30" Height="30" Foreground="DarkGreen" />
+
+                    <ListView x:Name="gameList" >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Height="40" Width="40" Source="{Binding court.icon}"></Image>
+                                        <StackPanel Margin="10">
+                                            <TextBlock Text="{Binding court.name}" FontSize="20" FontWeight="Bold" />
+                                            <TextBlock Text="{Binding Date}" FontSize="14" />
+                                            <TextBlock Text="{Binding horary}" FontSize="14" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <TextBlock x:Name="GameEmpty" Visibility="Collapsed" Text="Nenhum jogo encontrado" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </Grid>
             </PivotItem>
 
             <PivotItem Name="PivotPlayerSchedule">
                 <PivotItem.Header>
                     <TextBlock Text="Jogos próximos" />
                 </PivotItem.Header>
+
+                <Grid>
+                    <TextBlock x:Name="GamesProximity" Visibility="Collapsed" Text="Nenhum jogo próximo encontrado" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </Grid>
             </PivotItem>
 
             <PivotItem Name="PivotPlayerNotifications">
                 <PivotItem.Header>
                     <TextBlock Text="Notificações" />
                 </PivotItem.Header>
+
+                <Grid>
+                    <TextBlock x:Name="NotificationsEmpty" Visibility="Collapsed" Text="Nenhuma notificação encontrada" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </Grid>
             </PivotItem>
 
             <PivotItem Name="PivotPlayerProfile">

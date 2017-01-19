@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,10 @@ namespace KickOff_UWP.Models.Entities
 {
     public class Enterprise : Person
     {
+        [JsonProperty("id")]
         public string idEnterprise { get; set; }
+
+        [JsonProperty("telephone")]
         public string telephone { get; set; }
 
         public Enterprise(string idPerson, string fullName, string userName, string eMail, string password, string district, string lat, string lng, string idEnterprise, string telephone) : base(idPerson, fullName, userName, eMail, password, district, lat, lng)

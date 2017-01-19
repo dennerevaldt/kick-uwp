@@ -98,6 +98,7 @@
     <Compile Include="Models\Entities\ComboBoxType.cs" />
     <Compile Include="Models\Entities\Court.cs" />
     <Compile Include="Models\Entities\Enterprise.cs" />
+    <Compile Include="Models\Entities\Game.cs" />
     <Compile Include="Models\Entities\LatLng.cs" />
     <Compile Include="Models\Entities\Person.cs" />
     <Compile Include="Models\Entities\Place.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Models\Repositories\AuthRepository.cs" />
     <Compile Include="Models\Repositories\CourtRepository.cs" />
     <Compile Include="Models\Repositories\EnterpriseRepository.cs" />
+    <Compile Include="Models\Repositories\GameRepository.cs" />
     <Compile Include="Models\Repositories\PlayerRepository.cs" />
     <Compile Include="Models\Repositories\ScheduleRepository.cs" />
     <Compile Include="Models\Utils\Connection.cs" />
@@ -140,6 +142,9 @@
     </Compile>
     <Compile Include="Views\Player\DashboardPlayer.xaml.cs">
       <DependentUpon>DashboardPlayer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Player\NewGame.xaml.cs">
+      <DependentUpon>NewGame.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -200,6 +205,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Player\DashboardPlayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Player\NewGame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

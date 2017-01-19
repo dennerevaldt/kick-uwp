@@ -1,0 +1,27 @@
+﻿<Page
+    x:Class="KickOff_UWP.Views.Player.NewGame"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:KickOff_UWP.Views.Player"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.BottomAppBar>
+        <CommandBar Name="AppBar" Visibility="Visible" Background="DarkGreen">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Name="SaveGameBtn" Icon="Save" IsCompact="True" Label="salvar" Click="SaveGameBtn_Click" Foreground="White" />
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Grid Background="#fff">
+        <StackPanel Margin="10 14 10 15">
+            <TextBlock Text="Nova jogo" FontWeight="Bold" Foreground="DarkGreen"/>
+            <TextBox Name="txtBoxCourt" Header="Quadras próximas" PlaceholderText="" Margin="0 30 0 0"/>
+            <ComboBox x:Name="ComboBoxSchedules" Header="Horários" VerticalAlignment="Center" Margin="0 10 0 0" HorizontalAlignment="Stretch" DisplayMemberPath="description" />
+            <ProgressRing Name="loadingNewGame" Height="15" Width="15" Foreground="DarkGreen" Margin="0 15 15 0"/>
+            <TextBlock Name="txtBlockNewGame" Text="Salvando..." Foreground="DarkGreen" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        </StackPanel>
+    </Grid>
+</Page>
