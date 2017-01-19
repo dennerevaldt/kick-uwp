@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="KickOff_UWP.Views.Enterprise.NewSchedule"
+    x:Class="KickOff_UWP.Views.Enterprise.EditSchedule"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:KickOff_UWP.Views.Enterprise"
@@ -10,14 +10,14 @@
     <Page.BottomAppBar>
         <CommandBar Name="AppBar" Visibility="Visible" Background="DarkGreen">
             <CommandBar.PrimaryCommands>
-                <AppBarButton Name="SaveScheduleBtn" Icon="Save" IsCompact="True" Label="adicionar" Click="SaveScheduleBtn_Click" Foreground="White" />
+                <AppBarButton Name="SaveScheduleBtn" Icon="Save" IsCompact="True" Label="salvar" Click="SaveScheduleBtn_Click" Foreground="White" />
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
 
     <Grid Background="#fff">
         <StackPanel Margin="10 14 10 15">
-            <TextBlock Text="Novo horário" FontWeight="Bold" Foreground="DarkGreen"/>
+            <TextBlock Text="Editar horário" FontWeight="Bold" Foreground="DarkGreen"/>
             <DatePicker Name="dpDateSchedule" Header="Data" Margin="0 30 0 0" HorizontalAlignment="Stretch"/>
             <TimePicker Name="tmTimeSchedule" Header="Hora" Margin="0 10 0 0"  HorizontalAlignment="Stretch" />
             <ComboBox x:Name="ComboBoxCourt" Header="Quadra" VerticalAlignment="Center" Margin="0 10 0 0" HorizontalAlignment="Stretch" DisplayMemberPath="description" />

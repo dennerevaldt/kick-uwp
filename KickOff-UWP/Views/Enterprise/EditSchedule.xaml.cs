@@ -7,7 +7,6 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Core;
@@ -26,20 +25,22 @@ namespace KickOff_UWP.Views.Enterprise
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class NewSchedule : Page
+    public sealed partial class EditSchedule : Page
     {
         private ObservableCollection<ComboBoxType> comboBoxOptions;
+        private Schedule scheduleParam;
+        private ObservableCollection<Court> listCourts;
 
-        public NewSchedule()
+        public EditSchedule()
         {
             this.InitializeComponent();
-
-            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
 
             loadDataCourt();
 
             loadingNewSchedule.IsActive = false;
             txtBlockNewSchedule.Visibility = Visibility.Collapsed;
+
+            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
         }
 
         private void OnBackRequested(object sender, BackRequestedEventArgs e)
@@ -51,9 +52,17 @@ namespace KickOff_UWP.Views.Enterprise
             }
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            scheduleParam = e.Parameter as Schedule;
+            dpDateSchedule.Date = DateTime.Parse(scheduleParam.date);
+            tmTimeSchedule.Time = TimeSpan.Parse(scheduleParam.horary);
+        }
+
         private async void loadDataCourt()
         {
-            ObservableCollection<Court> listCourts = await CourtRepository.GetAll();
+            listCourts = await CourtRepository.GetAll();
 
             comboBoxOptions = new ObservableCollection<ComboBoxType>();
 
@@ -68,7 +77,7 @@ namespace KickOff_UWP.Views.Enterprise
             }
 
             ComboBoxCourt.ItemsSource = comboBoxOptions;
-            ComboBoxCourt.SelectedIndex = 0;
+            ComboBoxCourt.SelectedIndex = listCourts.IndexOf(listCourts.Where(x => x.id == scheduleParam.court.id).FirstOrDefault());
         }
 
         private void SaveScheduleBtn_Click(object sender, RoutedEventArgs e)
@@ -88,9 +97,9 @@ namespace KickOff_UWP.Views.Enterprise
 
             DateTime date = dpDateSchedule.Date.DateTime.AddDays(1);
 
-            Schedule schedule = new Schedule("", date.ToString("yyyy-MM-dd"), tmTimeSchedule.Time.ToString(), new Court(combo.value, combo.description, ""));
+            Schedule schedule = new Schedule(scheduleParam.id, date.ToString("yyyy-MM-dd"), tmTimeSchedule.Time.ToString(), new Court(combo.value, combo.description, ""));
 
-            var result = ScheduleRepository.Create(schedule);
+            var result = ScheduleRepository.Update(schedule);
 
             Frame.Navigate(typeof(DashboardEnterprise));
         }

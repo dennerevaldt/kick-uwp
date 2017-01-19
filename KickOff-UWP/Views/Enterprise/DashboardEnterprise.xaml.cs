@@ -24,6 +24,8 @@ namespace KickOff_UWP.Views.Enterprise
     {
         ObservableCollection<Court> listCourt = new ObservableCollection<Court>();
         Court courtSelected;
+        ObservableCollection<Schedule> listSchedule = new ObservableCollection<Schedule>();
+        Schedule scheduleSelected;
 
         public DashboardEnterprise()
         {
@@ -93,7 +95,17 @@ namespace KickOff_UWP.Views.Enterprise
                     AddCourtBtn.Visibility = Visibility.Collapsed;
                     AddScheduleBtn.Visibility = Visibility.Visible;
 
-                    ScheduleEmpty.Visibility = Visibility.Visible;
+                    listSchedule.Clear();
+
+                    loadingSchedule.IsActive = true;
+
+                    listSchedule = await ScheduleRepository.GetAll();
+                    scheduleList.ItemsSource = listSchedule;
+
+                    ScheduleEmpty.Visibility = listSchedule.Count <= 0 ? Visibility.Visible : Visibility.Collapsed;
+
+                    loadingSchedule.IsActive = false;
+                    
                     break;
                 case 2:
                     AppBar.Visibility = Visibility.Collapsed;
@@ -134,7 +146,7 @@ namespace KickOff_UWP.Views.Enterprise
 
         private async void DeleteButtonCourt_Click(object sender, RoutedEventArgs e)
         {
-            bool confirm = await DialogCustom.confirm("Confirmação", "Deseja realmente remover este elemento?");
+            bool confirm = await DialogCustom.confirm("Confirmação", "Deseja realmente remover esta quadra?");
 
             if (!confirm)
             {
@@ -155,6 +167,41 @@ namespace KickOff_UWP.Views.Enterprise
         private void courtList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Frame.Navigate(typeof(EditCourt), courtList.SelectedItem);
+        }
+
+        private void scheduleList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Frame.Navigate(typeof(EditSchedule), scheduleList.SelectedItem);
+        }
+
+        private void GridScheduleList_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            FrameworkElement senderElement = sender as FrameworkElement;
+
+            scheduleSelected = senderElement.DataContext as Schedule;
+
+            FlyoutBase flyoutBase = FlyoutBase.GetAttachedFlyout(senderElement);
+            flyoutBase.ShowAt(senderElement);
+        }
+
+        private async void DeleteButtonSchedule_Click(object sender, RoutedEventArgs e)
+        {
+            bool confirm = await DialogCustom.confirm("Confirmação", "Deseja realmente remover este horário?");
+
+            if (!confirm)
+            {
+                return;
+            }
+
+            listSchedule.Remove(scheduleSelected);
+            ScheduleEmpty.Visibility = listSchedule.Count <= 0 ? Visibility.Visible : Visibility.Collapsed;
+
+            var result = await ScheduleRepository.Delete(scheduleSelected);
+
+            if (result == null)
+            {
+                DialogCustom.dialog("Ops :(", "Estamos com problemas, tente novamente mais tarde");
+            }
         }
     }
 }
