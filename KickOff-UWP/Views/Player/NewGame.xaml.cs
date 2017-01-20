@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Core;
@@ -27,7 +28,9 @@ namespace KickOff_UWP.Views.Player
     /// </summary>
     public sealed partial class NewGame : Page
     {
-        private ObservableCollection<ComboBoxType> comboBoxOptions;
+        // private ObservableCollection<ComboBoxType> comboBoxOptions;
+        ObservableCollection<Models.Entities.Enterprise> listEnterprises;
+        ObservableCollection<Models.Entities.Schedule> listSchedules;
 
         public NewGame()
         {
@@ -56,19 +59,81 @@ namespace KickOff_UWP.Views.Player
             txtBlockNewGame.Visibility = Visibility.Visible;
             SaveGameBtn.IsEnabled = false;
 
-            ComboBoxType combo = ComboBoxSchedules.SelectedItem as ComboBoxType;
+            Schedule comboSchedule = ComboBoxSchedules.SelectedItem as Schedule;
+            Models.Entities.Enterprise comboEnterprise = ComboBoxEnterprises.SelectedItem as Models.Entities.Enterprise;
 
-            if (combo == null)
+            if (comboSchedule == null || comboEnterprise == null)
             {
                 DialogCustom.dialog("Atenção", "Preencha todos campos corretamente");
                 SaveGameBtn.IsEnabled = true;
+                loadingNewGame.IsActive = false;
+                txtBlockNewGame.Visibility = Visibility.Collapsed;
                 return;
             }
         }
 
         private async void getProximity()
         {
-            dynamic list = await EnterpriseRepository.GetProximity(new LatLng("-29.4753", "-49.9849"));
+            var accessStatus = await Geolocator.RequestAccessAsync();
+
+            switch (accessStatus)
+            {
+                case GeolocationAccessStatus.Allowed:
+
+                    // If DesiredAccuracy or DesiredAccuracyInMeters are not set (or value is 0), DesiredAccuracy.Default is used.
+                    Geolocator geolocator = new Geolocator();
+
+                    // Carry out the operation.
+                    Geoposition pos = await geolocator.GetGeopositionAsync();
+
+                    string lat = pos.Coordinate.Point.Position.Latitude.ToString().Substring(0, 7).Replace(",", ".");
+                    string lng = pos.Coordinate.Point.Position.Longitude.ToString().Substring(0, 7).Replace(",", ".");
+
+                    dynamic list = await EnterpriseRepository.GetProximity(new LatLng(lat, lng));
+
+                    listEnterprises = new ObservableCollection<Models.Entities.Enterprise>();
+
+                    foreach (var item in list)
+                    {
+                        listEnterprises.Add(new Models.Entities.Enterprise(
+                            item["Person"]["id"].ToString(),
+                            item["Person"]["fullname"].ToString(),
+                            item["Person"]["username"].ToString(),
+                            item["Person"]["email"].ToString(),
+                            item["Person"]["password"].ToString(),
+                            item["Person"]["district"].ToString(),
+                            item["Person"]["lat"].ToString(),
+                            item["Person"]["lng"].ToString(),
+                            item["id"].ToString(),
+                            item["telephone"].ToString())
+                        );
+                    }
+
+                    ComboBoxEnterprises.ItemsSource = listEnterprises;
+                    ComboBoxEnterprises.SelectedIndex = 0;
+
+                    break;
+
+                case GeolocationAccessStatus.Denied:
+                    DialogCustom.dialog("Permissão", "Estamos sem permissão para acessar sua localização, verifique e tente novamente.");
+                    break;
+
+                case GeolocationAccessStatus.Unspecified:
+                    DialogCustom.dialog("Permissão", "Estamos sem permissão para acessar sua localização, verifique e tente novamente.");
+                    break;
+            }
+        }
+
+        private async void ComboBoxEnterprises_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Models.Entities.Enterprise comboEnterprise = ComboBoxEnterprises.SelectedItem as Models.Entities.Enterprise;
+            listSchedules = await ScheduleRepository.GetAllById(comboEnterprise.idEnterprise);
+            ComboBoxSchedules.ItemsSource = listSchedules;
+
+            if (listSchedules.Count > 0)
+            {
+                ComboBoxSchedules.SelectedIndex = 0;
+            }
         }
     }
 }

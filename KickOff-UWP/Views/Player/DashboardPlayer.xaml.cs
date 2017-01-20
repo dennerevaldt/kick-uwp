@@ -30,7 +30,7 @@ namespace KickOff_UWP.Views.Player
     public sealed partial class DashboardPlayer : Page
     {
         ObservableCollection<Game> listGames = new ObservableCollection<Game>();
-        Game gameSelected;
+        //Game gameSelected;
 
         public DashboardPlayer()
         {

@@ -134,5 +134,34 @@ namespace KickOff_UWP.Models.Repositories
                 return null;
             }
         }
+
+        public static async Task<ObservableCollection<Schedule>> GetAllById(string id)
+        {
+            string url = Constants.getBaseUrl() + "/schedule/enterprise/" + id;
+
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            string user = localSettings.Values["fullname"] as string;
+
+            string token = AuthRepository.getCredentials(user);
+
+            dynamic result = await HTTP.get(url, token);
+
+            ObservableCollection<Schedule> list = JsonConvert.DeserializeObject<ObservableCollection<Schedule>>(result);
+
+            foreach (Schedule item in list)
+            {
+                if (item.court.category == "Futebol society (7)")
+                {
+                    item.court.icon = "/Assets/icon_society.png";
+                }
+
+                if (item.court.category == "Futebol de salão (Futsal)")
+                {
+                    item.court.icon = "/Assets/icon_futsal.png";
+                }
+            }
+
+            return list;
+        }
     }
 }

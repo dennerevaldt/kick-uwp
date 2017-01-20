@@ -18,8 +18,27 @@
     <Grid Background="#fff">
         <StackPanel Margin="10 14 10 15">
             <TextBlock Text="Nova jogo" FontWeight="Bold" Foreground="DarkGreen"/>
-            <TextBox Name="txtBoxCourt" Header="Quadras próximas" PlaceholderText="" Margin="0 30 0 0"/>
-            <ComboBox x:Name="ComboBoxSchedules" Header="Horários" VerticalAlignment="Center" Margin="0 10 0 0" HorizontalAlignment="Stretch" DisplayMemberPath="description" />
+            <ComboBox x:Name="ComboBoxEnterprises" Header="Quadras próximas" VerticalAlignment="Center" Margin="0 30 0 0" HorizontalAlignment="Stretch" SelectionChanged="ComboBoxEnterprises_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding fullName}" FontWeight="SemiBold" FontSize="16"></TextBlock>
+                            <TextBlock Text="{Binding district}" FontWeight="Light"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <ComboBox x:Name="ComboBoxSchedules" Header="Horários" VerticalAlignment="Center" Margin="0 10 0 0" HorizontalAlignment="Stretch">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding court.name}" FontWeight="SemiBold" FontSize="16"></TextBlock>
+                            <TextBlock Text="{Binding Date}" FontWeight="Medium"></TextBlock>
+                            <TextBlock Text="{Binding horary}" FontWeight="Light"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <ProgressRing Name="loadingNewGame" Height="15" Width="15" Foreground="DarkGreen" Margin="0 15 15 0"/>
             <TextBlock Name="txtBlockNewGame" Text="Salvando..." Foreground="DarkGreen" VerticalAlignment="Center" HorizontalAlignment="Center" />
         </StackPanel>
