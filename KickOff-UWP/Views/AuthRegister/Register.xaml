@@ -19,12 +19,13 @@
                 <PivotItem.Header>
                     <TextBlock Text="Empresa" />
                 </PivotItem.Header>
+                <ScrollViewer>
                 <StackPanel Orientation="Vertical">
-                    <TextBox Name="txtBoxEnterpriseFullname" PlaceholderText="Nome completo" Margin="0 0 0 10" />
-                    <TextBox Name="txtBoxEnterpriseEmail" PlaceholderText="E-mail" Margin="0 0 0 10" />
-                    <TextBox Name="txtBoxEnterpriseUsername" PlaceholderText="Usuário" Margin="0 0 0 10" />
-                    <PasswordBox Name="txtBoxEnterprisePwd" PlaceholderText="Senha" Margin="0 0 0 10" />
-                    <TextBox Name="txtBoxEnterpriseTelephone" PlaceholderText="Telefone" Margin="0 0 0 10" InputScope="TelephoneNumber" />
+                    <TextBox Name="txtBoxEnterpriseFullname" Header="Nome Completo" PlaceholderText="Nome completo" Margin="0 0 0 10" />
+                    <TextBox Name="txtBoxEnterpriseEmail" Header="E-mail" PlaceholderText="E-mail" Margin="0 0 0 10" />
+                    <TextBox Name="txtBoxEnterpriseUsername" Header="Usuário" PlaceholderText="Usuário" Margin="0 0 0 10" />
+                    <PasswordBox Name="txtBoxEnterprisePwd" Header="Senha" PlaceholderText="Senha" Margin="0 0 0 10" />
+                    <TextBox Name="txtBoxEnterpriseTelephone" Header="Telefone" PlaceholderText="Telefone" Margin="0 0 0 10" InputScope="TelephoneNumber" />
 
                     <Grid>
                         <Grid.RowDefinitions>
@@ -38,6 +39,7 @@
                             PlaceholderText="Pesquise sua cidade/estado"  
                             TextChanged="AutoSuggestBox_TextChanged" 
                             DisplayMemberPath="description"
+                            Header="Cidade/Estado"
                             SuggestionChosen="AutoSuggestBox_SuggestionChosen" />
 
                             <RelativePanel
@@ -69,18 +71,20 @@
                     </Grid>
 
                 </StackPanel>
+                </ScrollViewer>
             </PivotItem>
 
             <PivotItem Name="PivotItemPlayer">
                 <PivotItem.Header>
                     <TextBlock Text="Jogador" />
                 </PivotItem.Header>
+                <ScrollViewer>
                 <StackPanel Orientation="Vertical">
-                    <TextBox Name="txtBoxPlayerFullname" PlaceholderText="Nome completo" Margin="0 0 0 10" />
-                    <TextBox Name="txtBoxPlayerEmail" PlaceholderText="E-mail" Margin="0 0 0 10" />
-                    <TextBox Name="txtBoxPlayerUsername" PlaceholderText="Usuário" Margin="0 0 0 10" />
-                    <PasswordBox Name="txtBoxPlayerPwd" PlaceholderText="Senha" Margin="0 0 0 10" />
-                    <TextBox Name="txtBoxPlayerPosition" PlaceholderText="Posição" Margin="0 0 0 10" />
+                    <TextBox Name="txtBoxPlayerFullname" Header="Nome completo" PlaceholderText="Nome completo" Margin="0 0 0 10" />
+                    <TextBox Name="txtBoxPlayerEmail" Header="E-mail" PlaceholderText="E-mail" Margin="0 0 0 10" />
+                    <TextBox Name="txtBoxPlayerUsername" Header="Usuário" PlaceholderText="Usuário" Margin="0 0 0 10" />
+                    <PasswordBox Name="txtBoxPlayerPwd" Header="Senha" PlaceholderText="Senha" Margin="0 0 0 10" />
+                    <TextBox Name="txtBoxPlayerPosition" Header="Posição" PlaceholderText="Posição" Margin="0 0 0 10" />
 
                     <Grid>
                         <Grid.RowDefinitions>
@@ -94,6 +98,7 @@
                             PlaceholderText="Pesquise sua cidade/estado"  
                             TextChanged="AutoSuggestBox_TextChanged" 
                             DisplayMemberPath="description"
+                            Header="Cidade/Estado"
                             SuggestionChosen="AutoSuggestBox_SuggestionChosen" />
 
                         <RelativePanel
@@ -125,6 +130,7 @@
                     </Grid>
 
                 </StackPanel>
+                </ScrollViewer>
             </PivotItem>
         </Pivot>
     </Grid>

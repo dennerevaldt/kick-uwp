@@ -41,6 +41,14 @@ namespace KickOff_UWP.Views.Player
             loadingNewGame.IsActive = false;
             txtBlockNewGame.Visibility = Visibility.Collapsed;
 
+            ComboBoxEnterprises.Visibility = Visibility.Collapsed;
+            ComboBoxSchedules.Visibility = Visibility.Collapsed;
+
+            LoadDataEnt.Visibility = Visibility.Visible;
+            msgEnt.Visibility = Visibility.Collapsed;
+            LoadDataSch.Visibility = Visibility.Collapsed;
+            msgSch.Visibility = Visibility.Collapsed;
+
             getProximity();
         }
 
@@ -62,7 +70,7 @@ namespace KickOff_UWP.Views.Player
             Schedule comboSchedule = ComboBoxSchedules.SelectedItem as Schedule;
             Models.Entities.Enterprise comboEnterprise = ComboBoxEnterprises.SelectedItem as Models.Entities.Enterprise;
 
-            if (comboSchedule == null || comboEnterprise == null)
+            if (txtBoxNameGame.Text == "" || comboSchedule == null || comboEnterprise == null)
             {
                 DialogCustom.dialog("Atenção", "Preencha todos campos corretamente");
                 SaveGameBtn.IsEnabled = true;
@@ -70,6 +78,12 @@ namespace KickOff_UWP.Views.Player
                 txtBlockNewGame.Visibility = Visibility.Collapsed;
                 return;
             }
+
+            Game game = new Game("", txtBoxNameGame.Text, "", comboSchedule, null, null);
+
+            var result = GameRepository.Create(game);
+
+            Frame.Navigate(typeof(DashboardPlayer));
         }
 
         private async void getProximity()
@@ -110,7 +124,19 @@ namespace KickOff_UWP.Views.Player
                     }
 
                     ComboBoxEnterprises.ItemsSource = listEnterprises;
-                    ComboBoxEnterprises.SelectedIndex = 0;
+
+                    if (listEnterprises.Count > 0)
+                    {
+                        ComboBoxEnterprises.Visibility = Visibility.Visible;
+                        ComboBoxEnterprises.SelectedIndex = 0;
+                        msgEnt.Visibility = Visibility.Collapsed;
+                    } else
+                    {
+                        ComboBoxEnterprises.Visibility = Visibility.Collapsed;
+                        msgEnt.Visibility = Visibility.Visible;
+                    }
+
+                    LoadDataEnt.Visibility = Visibility.Collapsed;
 
                     break;
 
@@ -126,14 +152,24 @@ namespace KickOff_UWP.Views.Player
 
         private async void ComboBoxEnterprises_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            LoadDataSch.Visibility = Visibility.Visible;
+
             Models.Entities.Enterprise comboEnterprise = ComboBoxEnterprises.SelectedItem as Models.Entities.Enterprise;
             listSchedules = await ScheduleRepository.GetAllById(comboEnterprise.idEnterprise);
             ComboBoxSchedules.ItemsSource = listSchedules;
 
             if (listSchedules.Count > 0)
             {
+                ComboBoxSchedules.Visibility = Visibility.Visible;   
                 ComboBoxSchedules.SelectedIndex = 0;
+                msgSch.Visibility = Visibility.Collapsed;
+            } else
+            {
+                ComboBoxSchedules.Visibility = Visibility.Collapsed;
+                msgSch.Visibility = Visibility.Visible;
             }
+
+            LoadDataSch.Visibility = Visibility.Collapsed;
         }
     }
 }

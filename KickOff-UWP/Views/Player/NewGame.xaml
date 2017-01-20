@@ -18,7 +18,8 @@
     <Grid Background="#fff">
         <StackPanel Margin="10 14 10 15">
             <TextBlock Text="Nova jogo" FontWeight="Bold" Foreground="DarkGreen"/>
-            <ComboBox x:Name="ComboBoxEnterprises" Header="Quadras próximas" VerticalAlignment="Center" Margin="0 30 0 0" HorizontalAlignment="Stretch" SelectionChanged="ComboBoxEnterprises_SelectionChanged">
+            <TextBox Name="txtBoxNameGame" Header="Nome do jogo" PlaceholderText="Nome do jogo" Margin="0 30 0 0" />
+            <ComboBox x:Name="ComboBoxEnterprises" Header="Quadras próximas" VerticalAlignment="Center" Margin="0 15 0 0" HorizontalAlignment="Stretch" SelectionChanged="ComboBoxEnterprises_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">
@@ -28,17 +29,40 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
+            <!--message-->
+            <StackPanel Name="msgEnt" Orientation="Vertical" Margin="0 10 0 0">
+                <TextBlock Name="txtBlockMsgEnt" Text="Nenhuma quadra próxima" Foreground="DarkGreen" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </StackPanel>
+            <!--loading-->
+            <StackPanel Name="LoadDataEnt" Orientation="Vertical">
+                <ProgressRing Name="loadingDataEnt" IsActive="True" Height="15" Width="15" Foreground="DarkGreen" Margin="0 15 15 0"/>
+                <TextBlock Name="txtBlockDataEnt" Text="Carregando..." Foreground="DarkGreen" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </StackPanel>
+            
             <ComboBox x:Name="ComboBoxSchedules" Header="Horários" VerticalAlignment="Center" Margin="0 10 0 0" HorizontalAlignment="Stretch">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="{Binding court.name}" FontWeight="SemiBold" FontSize="16"></TextBlock>
-                            <TextBlock Text="{Binding Date}" FontWeight="Medium"></TextBlock>
-                            <TextBlock Text="{Binding horary}" FontWeight="Light"></TextBlock>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Height="40" Width="40" Source="{Binding court.icon}"></Image>
+                            <StackPanel Orientation="Vertical" Margin="10">
+                                <TextBlock Text="{Binding court.name}" FontWeight="SemiBold" FontSize="16"></TextBlock>
+                                <TextBlock Text="{Binding Date}" FontWeight="Medium"></TextBlock>
+                                <TextBlock Text="{Binding horary}" FontWeight="Light"></TextBlock>
+                            </StackPanel>
                         </StackPanel>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
+            <!--message-->
+            <StackPanel Name="msgSch" Orientation="Vertical" Margin="0 15 0 0">
+                <TextBlock Name="txtBlockMsgSch" Text="Nenhum horário disponível" Foreground="DarkGreen" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </StackPanel>
+            <!--loading-->
+            <StackPanel Name="LoadDataSch" Orientation="Vertical">
+                <ProgressRing Name="loadingDataSch" IsActive="True" Height="15" Width="15" Foreground="DarkGreen" Margin="0 15 15 0"/>
+                <TextBlock Name="txtBlockDataSch" Text="Carregando..." Foreground="DarkGreen" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </StackPanel>
+            
             <ProgressRing Name="loadingNewGame" Height="15" Width="15" Foreground="DarkGreen" Margin="0 15 15 0"/>
             <TextBlock Name="txtBlockNewGame" Text="Salvando..." Foreground="DarkGreen" VerticalAlignment="Center" HorizontalAlignment="Center" />
         </StackPanel>

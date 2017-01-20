@@ -29,7 +29,7 @@ namespace KickOff_UWP.Models.Repositories
 
             try
             {
-                if (result.id != null)
+                if (result[0][0]["game_id"] != null)
                 {
                     return game;
                 }
@@ -46,7 +46,7 @@ namespace KickOff_UWP.Models.Repositories
 
         public static async Task<ObservableCollection<Game>> GetAll()
         {
-            string url = Constants.getBaseUrl() + "/schedule";
+            string url = Constants.getBaseUrl() + "/game";
 
             var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
             string user = localSettings.Values["fullname"] as string;
@@ -54,8 +54,20 @@ namespace KickOff_UWP.Models.Repositories
             string token = AuthRepository.getCredentials(user);
 
             dynamic result = await HTTP.get(url, token);
+            dynamic listDes = JsonConvert.DeserializeObject<List<dynamic>>(result);
+            ObservableCollection<Game> list = new ObservableCollection<Game>();
 
-            ObservableCollection<Game> list = JsonConvert.DeserializeObject<ObservableCollection<Game>>(result);
+            foreach (var item in listDes)
+            {
+                list.Add(new Game(
+                    item["id"].ToString(), 
+                    item["name"].ToString(), 
+                    item["creator_id"].ToString(), 
+                    new Schedule(item["Schedule"]["id"].ToString(), item["Schedule"]["date"].ToString(), item["Schedule"]["horary"].ToString(), null), 
+                    null, 
+                    new Court(item["Schedule"]["Court"]["id"].ToString(), item["Schedule"]["Court"]["name"].ToString(), item["Schedule"]["Court"]["category"].ToString()))
+                );
+            }
 
             foreach (Game item in list)
             {
