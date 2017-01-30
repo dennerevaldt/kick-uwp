@@ -11,6 +11,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.UI;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -36,7 +37,13 @@ namespace KickOff_UWP.Views.Player
             this.InitializeComponent();
             PivotDashPlayer.Title = "Dashboard jogador";
 
+            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
             Window.Current.Activate();
+        }
+
+        private void OnBackRequested(object sender, BackRequestedEventArgs e)
+        {
+            App.Current.Exit();
         }
 
         private async void btnLogoutPlayer_Click(object sender, RoutedEventArgs e)

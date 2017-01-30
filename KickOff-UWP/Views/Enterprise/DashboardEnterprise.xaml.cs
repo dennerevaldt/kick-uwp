@@ -6,6 +6,7 @@ using System;
 using System.Collections.ObjectModel;
 using Windows.Storage;
 using Windows.UI;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -32,7 +33,13 @@ namespace KickOff_UWP.Views.Enterprise
             this.InitializeComponent();
             PivotDashEnterprise.Title = "Dashboard empresa";
 
-            Window.Current.Activate();          
+            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+            Window.Current.Activate();
+        }
+
+        private void OnBackRequested(object sender, BackRequestedEventArgs e)
+        {
+            App.Current.Exit();
         }
 
         private async void btnLogoutEnterprise_Click(object sender, RoutedEventArgs e)
