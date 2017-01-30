@@ -54,7 +54,9 @@ namespace KickOff_UWP.Views.Player
 
         private void OnBackRequested(object sender, BackRequestedEventArgs e)
         {
-            if (Frame.CanGoBack)
+            Frame root = Window.Current.Content as Frame;
+
+            if (root.CurrentSourcePageType == typeof(NewGame))
             {
                 Frame.GoBack();
                 e.Handled = true;

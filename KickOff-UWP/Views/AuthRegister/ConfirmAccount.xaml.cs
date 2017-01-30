@@ -56,9 +56,10 @@ namespace KickOff_UWP.Views.AuthRegister
 
         private void OnBackRequested(object sender, BackRequestedEventArgs e)
         {
-            if (Frame.CanGoBack)
+            Frame root = Window.Current.Content as Frame;
+
+            if (root.CurrentSourcePageType == typeof(ConfirmAccount))
             {
-                logoutFB();
                 Frame.GoBack();
                 e.Handled = true;
             }

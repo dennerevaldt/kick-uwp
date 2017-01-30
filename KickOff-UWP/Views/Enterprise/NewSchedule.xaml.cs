@@ -44,7 +44,9 @@ namespace KickOff_UWP.Views.Enterprise
 
         private void OnBackRequested(object sender, BackRequestedEventArgs e)
         {
-            if (Frame.CanGoBack)
+            Frame root = Window.Current.Content as Frame;
+
+            if (root.CurrentSourcePageType == typeof(NewSchedule))
             {
                 Frame.GoBack();
                 e.Handled = true;
