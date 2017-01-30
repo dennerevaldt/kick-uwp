@@ -57,6 +57,12 @@ namespace KickOff_UWP.Views.Enterprise
 
         private void SaveCourtBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (!Connection.IsInternet())
+            {
+                DialogCustom.dialog("Ops...", "Verifique sua conexão.");
+                return;
+            }
+
             loadingNewCourt.IsActive = true;
             txtBlockNewCourt.Visibility = Visibility.Visible;
             SaveCourtBtn.IsEnabled = false;

@@ -73,6 +73,12 @@ namespace KickOff_UWP.Views.Enterprise
 
         private void SaveScheduleBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (!Connection.IsInternet())
+            {
+                DialogCustom.dialog("Ops...", "Verifique sua conexão.");
+                return;
+            }
+
             ComboBoxType combo = ComboBoxCourt.SelectedItem as ComboBoxType;
 
             if (combo == null || dpDateSchedule.Date == null || tmTimeSchedule.Time == null)

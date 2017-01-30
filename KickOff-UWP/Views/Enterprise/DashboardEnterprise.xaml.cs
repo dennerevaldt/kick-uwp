@@ -59,6 +59,11 @@ namespace KickOff_UWP.Views.Enterprise
 
         private async void pivotEnterprise_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (!Connection.IsInternet())
+            {
+                DialogCustom.dialog("Ops...", "Verifique sua conexão.");
+                return;
+            }
 
             Pivot pivot = sender as Pivot;
             PivotItem pivotItemSelected = ((PivotItem)((Pivot)sender).SelectedItem);

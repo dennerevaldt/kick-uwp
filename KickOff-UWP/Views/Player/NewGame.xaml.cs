@@ -63,6 +63,12 @@ namespace KickOff_UWP.Views.Player
 
         private void SaveGameBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (!Connection.IsInternet())
+            {
+                DialogCustom.dialog("Ops...", "Verifique sua conexão.");
+                return;
+            }
+
             loadingNewGame.IsActive = true;
             txtBlockNewGame.Visibility = Visibility.Visible;
             SaveGameBtn.IsEnabled = false;

@@ -1,5 +1,6 @@
 ﻿using KickOff_UWP.Models.Entities;
 using KickOff_UWP.Models.Repositories;
+using KickOff_UWP.Models.Utils;
 using KickOff_UWP.Views.AuthRegister;
 using System;
 using System.Collections.Generic;
@@ -63,6 +64,12 @@ namespace KickOff_UWP.Views.Player
 
         private async void PivotDashPlayer_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (!Connection.IsInternet())
+            {
+                DialogCustom.dialog("Ops...", "Verifique sua conexão.");
+                return;
+            }
+
             Pivot pivot = sender as Pivot;
             PivotItem pivotItemSelected = ((PivotItem)((Pivot)sender).SelectedItem);
 
