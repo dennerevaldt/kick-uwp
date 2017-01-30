@@ -8,7 +8,7 @@
     mc:Ignorable="d">
 
     <Page.BottomAppBar>
-        <CommandBar Name="AppBar" Visibility="Visible" Background="DarkGreen">
+        <CommandBar Name="AppBar" Visibility="Visible" Background="#388E46">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Name="SaveGameBtn" Icon="Save" IsCompact="True" Label="salvar" Click="SaveGameBtn_Click" Foreground="White" />
             </CommandBar.PrimaryCommands>
@@ -17,7 +17,7 @@
 
     <Grid Background="#fff">
         <StackPanel Margin="10 14 10 15">
-            <TextBlock Text="Nova jogo" FontWeight="Bold" Foreground="DarkGreen"/>
+            <TextBlock Text="Nova jogo" FontWeight="Bold" Foreground="#388E46"/>
             <TextBox Name="txtBoxNameGame" Header="Nome do jogo" PlaceholderText="Nome do jogo" Margin="0 30 0 0" />
             <ComboBox x:Name="ComboBoxEnterprises" Header="Quadras próximas" VerticalAlignment="Center" Margin="0 15 0 0" HorizontalAlignment="Stretch" SelectionChanged="ComboBoxEnterprises_SelectionChanged">
                 <ComboBox.ItemTemplate>
@@ -31,12 +31,12 @@
             </ComboBox>
             <!--message-->
             <StackPanel Name="msgEnt" Orientation="Vertical" Margin="0 10 0 0">
-                <TextBlock Name="txtBlockMsgEnt" Text="Nenhuma quadra próxima" Foreground="DarkGreen" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <TextBlock Name="txtBlockMsgEnt" Text="Nenhuma quadra próxima" Foreground="#388E46" VerticalAlignment="Center" HorizontalAlignment="Center" />
             </StackPanel>
             <!--loading-->
             <StackPanel Name="LoadDataEnt" Orientation="Vertical">
-                <ProgressRing Name="loadingDataEnt" IsActive="True" Height="15" Width="15" Foreground="DarkGreen" Margin="0 15 15 0"/>
-                <TextBlock Name="txtBlockDataEnt" Text="Carregando..." Foreground="DarkGreen" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <ProgressRing Name="loadingDataEnt" IsActive="True" Height="15" Width="15" Foreground="#388E46" Margin="0 15 15 0"/>
+                <TextBlock Name="txtBlockDataEnt" Text="Carregando..." Foreground="#388E46" VerticalAlignment="Center" HorizontalAlignment="Center" />
             </StackPanel>
             
             <ComboBox x:Name="ComboBoxSchedules" Header="Horários" VerticalAlignment="Center" Margin="0 10 0 0" HorizontalAlignment="Stretch">
@@ -55,16 +55,16 @@
             </ComboBox>
             <!--message-->
             <StackPanel Name="msgSch" Orientation="Vertical" Margin="0 15 0 0">
-                <TextBlock Name="txtBlockMsgSch" Text="Nenhum horário disponível" Foreground="DarkGreen" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <TextBlock Name="txtBlockMsgSch" Text="Nenhum horário disponível" Foreground="#388E46" VerticalAlignment="Center" HorizontalAlignment="Center" />
             </StackPanel>
             <!--loading-->
             <StackPanel Name="LoadDataSch" Orientation="Vertical">
-                <ProgressRing Name="loadingDataSch" IsActive="True" Height="15" Width="15" Foreground="DarkGreen" Margin="0 15 15 0"/>
-                <TextBlock Name="txtBlockDataSch" Text="Carregando..." Foreground="DarkGreen" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <ProgressRing Name="loadingDataSch" IsActive="True" Height="15" Width="15" Foreground="#388E46" Margin="0 15 15 0"/>
+                <TextBlock Name="txtBlockDataSch" Text="Carregando..." Foreground="#388E46" VerticalAlignment="Center" HorizontalAlignment="Center" />
             </StackPanel>
-            
-            <ProgressRing Name="loadingNewGame" Height="15" Width="15" Foreground="DarkGreen" Margin="0 15 15 0"/>
-            <TextBlock Name="txtBlockNewGame" Text="Salvando..." Foreground="DarkGreen" VerticalAlignment="Center" HorizontalAlignment="Center" />
+
+            <ProgressRing Name="loadingNewGame" Height="15" Width="15" Foreground="#388E46" Margin="0 15 15 0"/>
+            <TextBlock Name="txtBlockNewGame" Text="Salvando..." Foreground="#388E46" VerticalAlignment="Center" HorizontalAlignment="Center" />
         </StackPanel>
     </Grid>
 </Page>

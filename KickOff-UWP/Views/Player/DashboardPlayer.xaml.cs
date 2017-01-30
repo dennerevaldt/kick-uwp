@@ -38,13 +38,7 @@ namespace KickOff_UWP.Views.Player
             this.InitializeComponent();
             PivotDashPlayer.Title = "Dashboard jogador";
 
-            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
             Window.Current.Activate();
-        }
-
-        private void OnBackRequested(object sender, BackRequestedEventArgs e)
-        {
-            App.Current.Exit();
         }
 
         private async void btnLogoutPlayer_Click(object sender, RoutedEventArgs e)
@@ -97,8 +91,9 @@ namespace KickOff_UWP.Views.Player
 
                     loadingGame.IsActive = true;
 
-                    listGames = await GameRepository.GetAll();
-                    gameList.ItemsSource = listGames;
+                    if(listGames != null)
+                        listGames = await GameRepository.GetAll();
+                        gameList.ItemsSource = listGames;
 
                     GameEmpty.Visibility = listGames.Count <= 0 ? Visibility.Visible : Visibility.Collapsed;
 

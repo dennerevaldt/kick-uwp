@@ -154,6 +154,11 @@
     <None Include="KickOff-UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\1240x600.png" />
+    <Content Include="Assets\300x300.png" />
+    <Content Include="Assets\50x50.png" />
+    <Content Include="Assets\620x300.png" />
+    <Content Include="Assets\88x88.png" />
     <Content Include="Assets\icon_futsal.png" />
     <Content Include="Assets\icon_society.png" />
     <Content Include="Assets\logo_100.png" />

@@ -8,12 +8,12 @@
     mc:Ignorable="d">
 
     <Page.BottomAppBar>
-        <CommandBar Background="#EEE">
-            <AppBarButton Label="Salvar" Icon="Save" Click="SaveNewUser" x:Name="AddItemAppBarBtn"></AppBarButton>
+        <CommandBar Background="#388E46">
+            <AppBarButton Label="Salvar" Foreground="White" Icon="Save" Click="SaveNewUser" x:Name="AddItemAppBarBtn"></AppBarButton>
         </CommandBar>
     </Page.BottomAppBar>
 
-    <Grid Background="#ccc">
+    <Grid Background="#fff">
         
         <Grid x:Name="MainGrid" Margin="15 50 15 0">
             <Grid.ColumnDefinitions>
@@ -30,11 +30,11 @@
             </Grid.RowDefinitions>
 
             <Grid x:Name="FirstGrid" Grid.Column="0" Grid.Row="0">
-                <TextBlock Text="Confirmar conta" TextAlignment="Center" FontSize="30"/>
+                <TextBlock Text="Confirmar conta" Foreground="#388E46" TextAlignment="Center" FontSize="30"/>
             </Grid>
 
             <Grid x:Name="SecondGrid" Grid.Column="0" Grid.Row="1">
-                <TextBlock Name="txtBoxName" TextWrapping="Wrap" FontSize="18"/>
+                <TextBlock Name="txtBoxName" TextWrapping="Wrap" Foreground="#388E46" FontSize="18"/>
             </Grid>
 
             <Grid x:Name="threeGrid" Grid.Column="0" Grid.Row="2">
@@ -89,8 +89,8 @@
 
             <Grid x:Name="SevenGrid" Grid.Column="0" Grid.Row="6" HorizontalAlignment="Center">
                 <StackPanel Orientation="Horizontal">
-                    <ProgressRing Name="prgLoad" Height="15" Width="15" Foreground="Gray" Margin="0 0 15 0"/>
-                    <TextBlock Name="txtBlockLoad" Text="Cadastrando..." Foreground="Gray" VerticalAlignment="Center" />
+                    <ProgressRing Name="prgLoad" Height="15" Width="15" Foreground="#388E46" Margin="0 0 15 0"/>
+                    <TextBlock Name="txtBlockLoad" Text="Cadastrando..." Foreground="#388E46" VerticalAlignment="Center" />
                 </StackPanel>
             </Grid>
 

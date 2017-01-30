@@ -33,13 +33,7 @@ namespace KickOff_UWP.Views.Enterprise
             this.InitializeComponent();
             PivotDashEnterprise.Title = "Dashboard empresa";
 
-            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
             Window.Current.Activate();
-        }
-
-        private void OnBackRequested(object sender, BackRequestedEventArgs e)
-        {
-            App.Current.Exit();
         }
 
         private async void btnLogoutEnterprise_Click(object sender, RoutedEventArgs e)
@@ -94,8 +88,9 @@ namespace KickOff_UWP.Views.Enterprise
 
                     loadingCourt.IsActive = true;
 
-                    listCourt = await CourtRepository.GetAll();
-                    courtList.ItemsSource = listCourt;
+                    if(listCourt != null)
+                        listCourt = await CourtRepository.GetAll();
+                        courtList.ItemsSource = listCourt;
 
                     CourtEmpty.Visibility = listCourt.Count <= 0 ? Visibility.Visible : Visibility.Collapsed;
 

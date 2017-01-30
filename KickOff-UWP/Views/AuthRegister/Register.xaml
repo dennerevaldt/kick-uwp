@@ -8,13 +8,13 @@
     mc:Ignorable="d">
 
     <Page.BottomAppBar>
-        <CommandBar Background="DarkGreen">
+        <CommandBar Background="#388E46">
             <AppBarButton Label="Salvar" Icon="Save" Click="SaveNewUser" x:Name="AddItemAppBarBtn" Foreground="White"></AppBarButton>
         </CommandBar>
     </Page.BottomAppBar>
     
     <Grid Background="#fff">
-        <Pivot Title="Cadastrar-se" Foreground="DarkGreen" Name="PivotUser" SelectionChanged="PivotUser_SelectionChanged">
+        <Pivot Title="Cadastrar-se" Foreground="#388E46" Name="PivotUser" SelectionChanged="PivotUser_SelectionChanged">
             <PivotItem Name="PivotItemEnterprise">
                 <PivotItem.Header>
                     <TextBlock Text="Empresa" />
@@ -65,8 +65,8 @@
 
                     <Grid HorizontalAlignment="Center" Margin="20">
                         <StackPanel Orientation="Horizontal">
-                            <ProgressRing Name="prgLoadEn" Height="15" Width="15" Foreground="White" Margin="0 0 15 0" />
-                            <TextBlock Name="txtBlockLoadEn" Text="Carregando..." Foreground="White" VerticalAlignment="Center" />
+                                <ProgressRing Name="prgLoadEn" Height="15" Width="15" Foreground="#388E46" Margin="0 0 15 0" />
+                                <TextBlock Name="txtBlockLoadEn" Text="Carregando..." Foreground="#388E46" VerticalAlignment="Center" />
                         </StackPanel>
                     </Grid>
 
@@ -124,8 +124,8 @@
 
                     <Grid HorizontalAlignment="Center" Margin="20">
                         <StackPanel Orientation="Horizontal">
-                            <ProgressRing Name="prgLoadPl" Height="15" Width="15" Foreground="Gray" Margin="0 0 15 0"/>
-                            <TextBlock Name="txtBlockLoadPl" Text="Carregando..." Foreground="Gray" VerticalAlignment="Center" />
+                                <ProgressRing Name="prgLoadPl" Height="15" Width="15" Foreground="#388E46" Margin="0 0 15 0"/>
+                                <TextBlock Name="txtBlockLoadPl" Text="Carregando..." Foreground="#388E46" VerticalAlignment="Center" />
                         </StackPanel>
                     </Grid>
 

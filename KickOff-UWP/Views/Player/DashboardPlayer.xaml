@@ -8,7 +8,7 @@
     mc:Ignorable="d">
 
     <Page.BottomAppBar>
-        <CommandBar Name="AppBar" Visibility="Visible" Background="DarkGreen">
+        <CommandBar Name="AppBar" Visibility="Visible" Background="#388E46">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Name="AddGameBtn" Icon="Add" IsCompact="True" Label="adicionar" Click="AddGameBtn_Click" Foreground="White" />
             </CommandBar.PrimaryCommands>
@@ -16,7 +16,7 @@
     </Page.BottomAppBar>
 
     <Grid Background="#fff">
-        <Pivot Name="PivotDashPlayer" SelectionChanged="PivotDashPlayer_SelectionChanged" Foreground="DarkGreen">
+        <Pivot Name="PivotDashPlayer" SelectionChanged="PivotDashPlayer_SelectionChanged" Foreground="#388E46">
             <PivotItem Name="PivotPlayerCourt">
                 <PivotItem.Header>
                     <TextBlock Text="Jogos" />
@@ -24,7 +24,7 @@
 
                 <Grid Name="gridGameList">
 
-                    <ProgressRing Name="loadingGame" Width="30" Height="30" Foreground="DarkGreen" />
+                    <ProgressRing Name="loadingGame" Width="30" Height="30" Foreground="#388E46" />
 
                     <ListView x:Name="gameList" >
                         <ListView.ItemTemplate>

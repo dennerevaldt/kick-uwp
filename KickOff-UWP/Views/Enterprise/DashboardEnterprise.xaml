@@ -8,7 +8,7 @@
     mc:Ignorable="d">
 
     <Page.BottomAppBar>
-        <CommandBar Name="AppBar" Visibility="Visible" Background="DarkGreen">
+        <CommandBar Name="AppBar" Visibility="Visible" Background="#388E46">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Visibility="Collapsed" Name="AddCourtBtn" Icon="Add" IsCompact="True" Label="adicionar" Click="AddCourtBtn_Click" Foreground="White" />
                 <AppBarButton Visibility="Collapsed" Name="AddScheduleBtn" Icon="Add" IsCompact="True" Label="adicionar" Click="AddScheduleBtn_Click" Foreground="White" />
@@ -17,15 +17,15 @@
     </Page.BottomAppBar>
 
     <Grid Background="#fff">
-        <Pivot Name="PivotDashEnterprise" SelectionChanged="pivotEnterprise_SelectionChanged" Foreground="DarkGreen">
+        <Pivot Name="PivotDashEnterprise" SelectionChanged="pivotEnterprise_SelectionChanged" Foreground="#388E46">
             <PivotItem Name="PivotEnterpriseCourt">
                 <PivotItem.Header>
                     <TextBlock Text="Quadras" />
                 </PivotItem.Header>
 
                 <Grid Name="gridCourtList">
-                    
-                    <ProgressRing Name="loadingCourt" Width="30" Height="30" Foreground="DarkGreen" />
+
+                    <ProgressRing Name="loadingCourt" Width="30" Height="30" Foreground="#388E46" />
                     
                     <ListView x:Name="courtList" SelectionChanged="courtList_SelectionChanged" >
                         <ListView.ItemTemplate>
@@ -61,7 +61,7 @@
 
                 <Grid Name="gridScheduleList">
 
-                    <ProgressRing Name="loadingSchedule" Width="30" Height="30" Foreground="DarkGreen" />
+                    <ProgressRing Name="loadingSchedule" Width="30" Height="30" Foreground="#388E46" />
 
                     <ListView x:Name="scheduleList" SelectionChanged="scheduleList_SelectionChanged" >
                         <ListView.ItemTemplate>

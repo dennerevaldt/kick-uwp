@@ -3,6 +3,7 @@ using KickOff_UWP.Models.Repositories;
 using KickOff_UWP.Models.Utils;
 using KickOff_UWP.Views.Enterprise;
 using KickOff_UWP.Views.Player;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -211,7 +212,7 @@ namespace KickOff_UWP.Views.AuthRegister
                         break;
                 }
 
-                dynamic data = await AuthRepository.getDataUSer(token);
+                dynamic data = JsonConvert.DeserializeObject(await AuthRepository.getDataUSer(token));
                 AuthRepository.setCredentials(token, data);
 
                 var typeUser = (string)data.Person.typeperson;

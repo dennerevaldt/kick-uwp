@@ -8,7 +8,7 @@
     mc:Ignorable="d">
 
     <Page.BottomAppBar>
-        <CommandBar Name="AppBar" Visibility="Visible" Background="DarkGreen">
+        <CommandBar Name="AppBar" Visibility="Visible" Background="#388E46">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Name="SaveScheduleBtn" Icon="Save" IsCompact="True" Label="adicionar" Click="SaveScheduleBtn_Click" Foreground="White" />
             </CommandBar.PrimaryCommands>
@@ -17,12 +17,12 @@
 
     <Grid Background="#fff">
         <StackPanel Margin="10 14 10 15">
-            <TextBlock Text="Novo horário" FontWeight="Bold" Foreground="DarkGreen"/>
+            <TextBlock Text="Novo horário" FontWeight="Bold" Foreground="#388E46"/>
             <DatePicker Name="dpDateSchedule" Header="Data" Margin="0 30 0 0" HorizontalAlignment="Stretch"/>
             <TimePicker Name="tmTimeSchedule" Header="Hora" Margin="0 10 0 0"  HorizontalAlignment="Stretch" />
             <ComboBox x:Name="ComboBoxCourt" Header="Quadra" VerticalAlignment="Center" Margin="0 10 0 0" HorizontalAlignment="Stretch" DisplayMemberPath="description" />
-            <ProgressRing Name="loadingNewSchedule" Height="15" Width="15" Foreground="DarkGreen" Margin="0 15 15 0"/>
-            <TextBlock Name="txtBlockNewSchedule" Text="Salvando..." Foreground="DarkGreen" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            <ProgressRing Name="loadingNewSchedule" Height="15" Width="15" Foreground="#388E46" Margin="0 15 15 0"/>
+            <TextBlock Name="txtBlockNewSchedule" Text="Salvando..." Foreground="#388E46" VerticalAlignment="Center" HorizontalAlignment="Center" />
         </StackPanel>
     </Grid>
 </Page>
